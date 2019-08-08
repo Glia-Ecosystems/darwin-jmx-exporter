@@ -6,7 +6,7 @@ pipeline {
   }
 
   environment {
-    JMX_EXPORTER_RELEASE = 'https://github.com/Glia-Ecosystems/darwin-jmx-exporter/archive/parent-0.12.0.tar.gz'
+    JMX_EXPORTER_VERSION = '0.12.0'
   }
 
   stages {
@@ -23,8 +23,8 @@ pipeline {
 
       steps {
         sh """#!/bin/bash
-          wget -O exporter.tar.gz ${env.JMX_EXPORTER_RELEASE}
-          tar xvfz exporter.tar.gz
+          wget -O exporter.tar.gz https://github.com/Glia-Ecosystems/darwin-jmx-exporter/archive/parent-${env.JMX_EXPORTER_VERSION}.tar.gz
+          tar xvfz exporter.tar.gz -C exporter
         """
       }
     }
@@ -38,9 +38,20 @@ pipeline {
       }
       steps {
         sh """#!/bin/bash
-          cd darwin-jmx-exporter-parent-0.12.0
+          cd exporter
           mvn package
         """
+      }
+    }
+
+    stage('Upload to S3') {
+      agent any
+
+      steps {
+        s3_upload(
+          bucket: "glia-installers-bucket",
+          path: "exporter/jmx_exporter-parent-"${env.JMX_EXPORTER_RELEASE}"/jmx_prometheus_javaagent/target/",
+          region: "eu-west-1")
       }
     }
   }
