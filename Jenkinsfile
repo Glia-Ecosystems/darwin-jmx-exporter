@@ -39,7 +39,7 @@ pipeline {
       }
       steps {
         sh """#!/bin/bash
-          cd exporter
+          cd exporter/jmx_exporter-parent-"${env.JMX_EXPORTER_RELEASE}"
           mvn package
         """
       }
