@@ -41,7 +41,6 @@ pipeline {
         sh """#!/bin/bash
           cd exporter/jmx_exporter-parent-"${env.JMX_EXPORTER_VERSION}"
           mvn package
-          tree
         """
       }
     }
