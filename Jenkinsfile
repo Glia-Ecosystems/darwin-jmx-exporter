@@ -29,18 +29,19 @@ pipeline {
       }
     }
 
-    // stage('Build Exporter') {
-    //   agent any
-
-    //   steps {
-    //     docker_login_ecr()
-    //     docker_login_nexus()
-    //     remove_docker_networks()
-
-    //     sh '''
-
-    //     '''
-    //   }
-    // }
+    stage('Build Exporter') {
+      agent {
+        docker {
+            image '546056091706.dkr.ecr.eu-west-1.amazonaws.com/dockermvn'
+            args '--entrypoint ""'
+        }
+      }
+      steps {
+        sh """#!/bin/bash
+          cd darwin-jmx-exporter-parent-0.12.0
+          mvn package
+        """
+      }
+    }
   }
 }
