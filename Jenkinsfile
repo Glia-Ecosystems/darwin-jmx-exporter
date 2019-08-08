@@ -15,7 +15,6 @@ pipeline {
       
       steps {
         echo "JMX_EXPORTER_RELEASE = ${env.JMX_EXPORTER_RELEASE}"
-        assign_build_Version(projectType: 'maven')
       }
     }
 
