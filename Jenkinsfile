@@ -24,6 +24,7 @@ pipeline {
       steps {
         sh """#!/bin/bash
           wget -O exporter.tar.gz https://github.com/Glia-Ecosystems/darwin-jmx-exporter/archive/parent-${env.JMX_EXPORTER_VERSION}.tar.gz
+          mkdir exporter
           tar xvfz exporter.tar.gz -C exporter
         """
       }
