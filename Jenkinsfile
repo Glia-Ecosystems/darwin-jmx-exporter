@@ -39,7 +39,7 @@ pipeline {
       }
       steps {
         sh """#!/bin/bash
-          cd exporter/jmx_exporter-parent-"${env.JMX_EXPORTER_VERSION}"
+          cd exporter/jmx-exporter-parent-"${env.JMX_EXPORTER_VERSION}"
           mvn package
         """
       }
@@ -51,7 +51,7 @@ pipeline {
       steps {
         s3_upload(
           bucket: "glia-installers-bucket",
-          path: "exporter/jmx_exporter-parent-" + env.JMX_EXPORTER_VERSION + "/jmx_prometheus_javaagent/target",
+          path: "exporter/jmx-exporter-parent-" + env.JMX_EXPORTER_VERSION + "/jmx_prometheus_javaagent/target",
           region: "eu-west-1")
       }
     }
