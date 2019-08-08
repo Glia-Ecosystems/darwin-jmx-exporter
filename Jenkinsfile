@@ -51,7 +51,7 @@ pipeline {
       steps {
         s3_upload(
           bucket: "glia-installers-bucket",
-          path: "exporter/jmx_exporter-parent-${env.JMX_EXPORTER_RELEASE}/jmx_prometheus_javaagent/target/",
+          path: "exporter/jmx_exporter-parent-" + env.JMX_EXPORTER_RELEASE + "/jmx_prometheus_javaagent/target/",
           region: "eu-west-1")
       }
     }
