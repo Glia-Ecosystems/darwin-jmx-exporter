@@ -33,12 +33,8 @@ pipeline {
     }
 
     stage('Build & Upload Exporter') {
-      agent {
-        docker {
-            image '546056091706.dkr.ecr.eu-west-1.amazonaws.com/dockermvn'
-            args '--entrypoint ""'
-        }
-      }
+      agent any
+
       steps {
         sh """#!/bin/bash
           cd darwin-jmx-exporter-parent-"${env.JMX_EXPORTER_VERSION}"/
@@ -47,7 +43,7 @@ pipeline {
 
         s3_upload(
           bucket: "glia-installers-bucket",
-          path: "jmx_prometheus_javaagent/target",
+          path: "darwin-jmx-exporter-parent-" + env.JMX_EXPORTER_VERSION +"/jmx_prometheus_javaagent/target",
           region: "eu-west-1")
       }
     }
