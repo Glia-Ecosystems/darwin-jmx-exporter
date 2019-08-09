@@ -49,7 +49,6 @@ pipeline {
           bucket: "glia-installers-bucket",
           path: "jmx_prometheus_javaagent/target",
           region: "eu-west-1")
-        }
       }
     }
   }
