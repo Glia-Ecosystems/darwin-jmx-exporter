@@ -39,9 +39,6 @@ pipeline {
         sh """#!/bin/bash
           cd darwin-jmx-exporter-parent-"${env.JMX_EXPORTER_VERSION}"/
           mvn package
-
-          cd
-          ls -la 
         """
 
         s3_upload(
