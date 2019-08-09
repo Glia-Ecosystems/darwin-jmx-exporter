@@ -52,6 +52,7 @@ pipeline {
 
       steps {
         sh """#!/bin/bash  
+          pwd
           ls -la
           ls -la darwin-jmx-exporter-parent-0.12.0/*
           ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/*
