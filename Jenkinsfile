@@ -43,32 +43,13 @@ pipeline {
         sh """#!/bin/bash
           cd darwin-jmx-exporter-parent-"${env.JMX_EXPORTER_VERSION}"/
           mvn package
-
-          pwd
-          ls -la
-          ls -la darwin-jmx-exporter-parent-0.12.0/*
-          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/*
-          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/target/*
-        """
-      }
-    }
-
-    stage('Upload to S3') {
-      agent any
-
-      steps {
-        sh """#!/bin/bash  
-          pwd
-          ls -la
-          ls -la darwin-jmx-exporter-parent-0.12.0/*
-          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/*
-          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/target/*
         """
 
         s3_upload(
           bucket: "glia-installers-bucket",
-          path: "darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/target",
+          path: "jmx_prometheus_javaagent/target",
           region: "eu-west-1")
+        }
       }
     }
   }
