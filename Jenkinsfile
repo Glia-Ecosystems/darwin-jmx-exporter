@@ -53,11 +53,14 @@ pipeline {
       steps {
         sh """#!/bin/bash  
           ls -la
+          ls -la darwin-jmx-exporter-parent-0.12.0/*
+          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/*
+          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/target/*
         """
 
         s3_upload(
           bucket: "glia-installers-bucket",
-          path: "e_prometheus_jmx_exporter_master/jmx_prometheus_javaagent/target",
+          path: "darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/target",
           region: "eu-west-1")
       }
     }
