@@ -26,6 +26,8 @@ pipeline {
           wget -O exporter.tar.gz https://github.com/Glia-Ecosystems/darwin-jmx-exporter/archive/parent-${env.JMX_EXPORTER_VERSION}.tar.gz
 
           tar xvfz exporter.tar.gz
+          
+          ls -la
         """
       }
     }
@@ -49,6 +51,10 @@ pipeline {
       agent any
 
       steps {
+        sh """#!/bin/bash  
+          ls -la
+        """
+
         s3_upload(
           bucket: "glia-installers-bucket",
           path: "e_prometheus_jmx_exporter_master/jmx_prometheus_javaagent/target",
