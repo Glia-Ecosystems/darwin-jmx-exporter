@@ -42,8 +42,8 @@ pipeline {
         """
 
         s3_upload(
-          bucket: "glia-installers-bucket",
-          path: "darwin-jmx-exporter-parent-" + env.JMX_EXPORTER_VERSION +"/jmx_prometheus_javaagent/target",
+          bucket: "glia-installers-bucket/jmx_exporter",
+          path: "darwin-jmx-exporter-parent-" + env.JMX_EXPORTER_VERSION +"/jmx_prometheus_javaagent/target/jmx_prometheus_javaagent-" + env.JMX_EXPORTER_VERSION + ".jar",
           region: "eu-west-1")
       }
     }
