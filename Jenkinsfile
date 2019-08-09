@@ -32,7 +32,7 @@ pipeline {
       }
     }
 
-    stage('Build Exporter') {
+    stage('Build & Upload Exporter') {
       agent {
         docker {
             image '546056091706.dkr.ecr.eu-west-1.amazonaws.com/dockermvn'
@@ -43,6 +43,12 @@ pipeline {
         sh """#!/bin/bash
           cd darwin-jmx-exporter-parent-"${env.JMX_EXPORTER_VERSION}"/
           mvn package
+
+          pwd
+          ls -la
+          ls -la darwin-jmx-exporter-parent-0.12.0/*
+          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/*
+          ls -la darwin-jmx-exporter-parent-0.12.0/jmx_prometheus_javaagent/target/*
         """
       }
     }
